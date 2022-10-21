@@ -1,15 +1,12 @@
 name: CI
-
 on:
   [push]
-
 
 jobs:
   syncToOnPrem:
     runs-on: ubuntu-latest
-
-
-    steps:
+    
+    steps:   
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
@@ -17,4 +14,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: touch /home/mike/GH_INTERVIEW/works
+          script: cd ${{ secrets.GITPATH }}/miketest && git fetch origin && git reset refs/remotes/origin/main --hard
